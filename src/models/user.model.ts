@@ -41,6 +41,12 @@ UserSchema.pre('save', function (next) {
   next();
 });
 
+UserSchema.methods.toJSON = function () {
+  const user = this.toObject();
+  delete user.password;
+  return user;
+};
+
 // jembatan dari controller ke database
 const UserModel = mongoose.model('User', UserSchema);
 
