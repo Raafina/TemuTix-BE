@@ -3,6 +3,7 @@ import * as Yup from 'yup';
 import UserModel from '../models/user.model';
 import { encrypt } from '../utils/encryption';
 import { generateToken } from '../utils/jwt';
+import { IReqUser } from '../middlewares/auth.middleware';
 
 type TRegister = {
   fullName: string;
@@ -62,6 +63,12 @@ export default {
   },
 
   async login(req: Request, res: Response) {
+    /**
+     #swagger.request.body{
+     required: true,
+     schema: {$ref: "#/components/schemas/LoginRequest"}
+     }
+     */
     const { identifier, password } = req.body as unknown as Login;
     try {
       // get user data from identifier -> email or username
@@ -95,6 +102,30 @@ export default {
       res.status(200).json({
         message: 'Login Success',
         data: token,
+      });
+    } catch (error) {
+      const err = error as unknown as Error;
+      res.status(400).json({
+        message: err.message,
+        data: null,
+      });
+    }
+  },
+
+  async me(req: IReqUser, res: Response) {
+    /**
+     #swagger.security [{
+    " beaererAuth": []
+     }]
+     */
+    try {
+      const user = req.user;
+
+      const result = await UserModel.findById(user?.id);
+
+      res.status(200).json({
+        message: 'Success get user profile',
+        data: result,
       });
     } catch (error) {
       const err = error as unknown as Error;
