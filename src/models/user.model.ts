@@ -1,6 +1,7 @@
 import mongoose from 'mongoose';
 import { encrypt } from '../utils/encryption';
-
+import { renderMailHtml, sendMail } from '../utils/mail/mail';
+import { CLIEN_HOST, EMAIL_SMTP_USER } from '../utils/env';
 export interface User {
   fullName: string;
   username: string;
@@ -10,6 +11,7 @@ export interface User {
   profilePicture: string;
   isActive: boolean;
   activationCode: string;
+  createdAt?: Date;
 }
 
 const Schema = mongoose.Schema;
@@ -34,11 +36,39 @@ const UserSchema = new Schema<User>(
   }
 );
 
+// middleware before save
 UserSchema.pre('save', function (next) {
   const user = this;
 
   user.password = encrypt(user.password);
   next();
+});
+
+UserSchema.post('save', async function (doc, next) {
+  try {
+    const user = doc;
+
+    console.log('user saved');
+
+    const contentMail = await renderMailHtml('registration-success.ejs', {
+      username: user.username,
+      fullName: user.fullName,
+      email: user.email,
+      createdAt: user.createdAt,
+      activationUrl: `${CLIEN_HOST}/auth/activation?code=${user.activationCode}`,
+    });
+
+    await sendMail({
+      from: EMAIL_SMTP_USER,
+      to: user.email,
+      subject: 'Temutix Account Activation',
+      html: contentMail,
+    });
+  } catch (error) {
+    console.log(error);
+  } finally {
+    next();
+  }
 });
 
 UserSchema.methods.toJSON = function () {
