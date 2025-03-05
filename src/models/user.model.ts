@@ -19,8 +19,8 @@ const Schema = mongoose.Schema;
 const UserSchema = new Schema<User>(
   {
     fullName: { type: Schema.Types.String, required: true },
-    username: { type: Schema.Types.String, required: true },
-    email: { type: Schema.Types.String, required: true },
+    username: { type: Schema.Types.String, required: true, unique: true },
+    email: { type: Schema.Types.String, required: true, unique: true },
     password: { type: Schema.Types.String, required: true },
     role: {
       type: Schema.Types.String,
@@ -41,6 +41,8 @@ UserSchema.pre('save', function (next) {
   const user = this;
 
   user.password = encrypt(user.password);
+  user.activationCode = encrypt(user.id);
+
   next();
 });
 
@@ -55,7 +57,7 @@ UserSchema.post('save', async function (doc, next) {
       fullName: user.fullName,
       email: user.email,
       createdAt: user.createdAt,
-      activationUrl: `${CLIEN_HOST}/auth/activation?code=${user.activationCode}`,
+      activationUrl: `localhost:3009/auth/activation?code=${user.activationCode}`,
     });
 
     await sendMail({

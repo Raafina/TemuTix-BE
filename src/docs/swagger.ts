@@ -27,6 +27,16 @@ const doc = {
         identifier: 'raafi',
         password: '12345',
       },
+      RegisterRequest: {
+        fullName: 'raafi',
+        username: 'raafi',
+        email: 'primeshokaku@gmail.com',
+        password: '12345',
+        confirmPassword: '12345',
+      },
+      ActivationRequest: {
+        code: '12345',
+      },
     },
   },
 };
