@@ -97,7 +97,10 @@ export default {
     try {
       // get user data from identifier -> email or username
       const userByIdentifier = await UserModel.findOne({
-        $or: [{ email: identifier }, { username: identifier }], isActive: true
+        $or: [
+          { email: identifier },
+          { username: identifier }],
+        isActive: true // just user who active account
       });
 
       if (!userByIdentifier) {
@@ -143,13 +146,19 @@ export default {
      */
     try {
       const user = req.user;
-
+      console.log(req.user, 'user');
       const result = await UserModel.findById(user?.id);
-
+      console.log(result);
       res.status(200).json({
         message: 'Success get user profile',
         data: result,
       });
+      if (!result) {
+        return res.status(404).json({
+          message: 'User not found',
+          data: null,
+        });
+      }
     } catch (error) {
       const err = error as unknown as Error;
       res.status(400).json({
