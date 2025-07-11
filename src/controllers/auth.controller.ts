@@ -4,6 +4,7 @@ import UserModel from '../models/user.model';
 import { encrypt } from '../utils/encryption';
 import { generateToken } from '../utils/jwt';
 import { IReqUser } from '../utils/interface';
+import response from '../utils/response';
 
 type TRegister = {
   fullName: string;
@@ -13,7 +14,7 @@ type TRegister = {
   confirmPassword: string;
 };
 
-export interface Login {
+export interface TLogin {
   identifier: string;
   password: string;
 }
@@ -72,16 +73,10 @@ export default {
         password,
       });
 
-      res.status(200).json({
-        message: 'Register Success',
-        data: result,
-      });
+      response.success(res, result, 'Success registration');
     } catch (error) {
       const err = error as unknown as Error;
-      res.status(400).json({
-        message: err.message,
-        data: null,
-      });
+      response.error(res, err, 'Failed registration');
     }
   },
 
@@ -93,7 +88,7 @@ export default {
       schema: {$ref: "#/components/schemas/LoginRequest"}
      }
      */
-    const { identifier, password } = req.body as unknown as Login;
+    const { identifier, password } = req.body as unknown as TLogin;
     try {
       // get user data from identifier -> email or username
       const userByIdentifier = await UserModel.findOne({
@@ -104,10 +99,7 @@ export default {
       });
 
       if (!userByIdentifier) {
-        return res.status(403).json({
-          message: 'User not found',
-          data: null,
-        });
+        return response.unauthorized(res, 'User not found');
       }
 
       // validate req password
@@ -115,10 +107,7 @@ export default {
         encrypt(password) === userByIdentifier.password;
 
       if (!validatePassword) {
-        return res.status(403).json({
-          message: 'User not match',
-          data: null,
-        });
+        return response.unauthorized(res, 'Password not match');
       }
 
       const token = generateToken({
@@ -126,16 +115,10 @@ export default {
         role: userByIdentifier.role,
       });
 
-      res.status(200).json({
-        message: 'Login Success',
-        data: token,
-      });
+      response.success(res, { token }, 'Login success');
     } catch (error) {
       const err = error as unknown as Error;
-      res.status(400).json({
-        message: err.message,
-        data: null,
-      });
+      response.error(res, err, 'Login failed');
     }
   },
 
@@ -146,25 +129,14 @@ export default {
      */
     try {
       const user = req.user;
-      console.log(req.user, 'user');
       const result = await UserModel.findById(user?.id);
-      console.log(result);
-      res.status(200).json({
-        message: 'Success get user profile',
-        data: result,
-      });
+      response.success(res, result, 'Success get user profile');
       if (!result) {
-        return res.status(404).json({
-          message: 'User not found',
-          data: null,
-        });
+
       }
     } catch (error) {
       const err = error as unknown as Error;
-      res.status(400).json({
-        message: err.message,
-        data: null,
-      });
+      response.error(res, err, err.message);
     }
   },
 
@@ -187,19 +159,11 @@ export default {
         new: true, // exactly execute the query
       });
 
-
-      return res.status(400).json({
-        message: 'User succesfully activated',
-        data: user,
-      });
-
+      response.success(res, user, 'Activation success');
     }
     catch (error) {
       const err = error as unknown as Error;
-      res.status(400).json({
-        message: err.message,
-        data: null,
-      });
+      response.error(res, err, err.message);
     }
   }
 };
