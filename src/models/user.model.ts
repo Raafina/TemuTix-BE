@@ -3,6 +3,7 @@ import { encrypt } from '../utils/encryption';
 import { renderMailHtml, sendMail } from '../utils/mail/mail';
 import { CLIEN_HOST, EMAIL_SMTP_USER } from '../utils/env';
 import { ROLES } from '../utils/contants';
+
 export interface User {
   fullName: string;
   username: string;
@@ -58,7 +59,7 @@ UserSchema.post('save', async function (doc, next) {
       fullName: user.fullName,
       email: user.email,
       createdAt: user.createdAt,
-      activationUrl: `localhost:3009/auth/activation?code=${user.activationCode}`,
+      activationUrl: `${CLIEN_HOST}/auth/activation?code=${user.activationCode}`,
     });
 
     await sendMail({
