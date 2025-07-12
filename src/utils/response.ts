@@ -24,11 +24,9 @@ export default {
             return res.status(400).json({
                 meta: {
                     status: 400,
-                    message,
+                    message: error.message,
                 },
-                data: {
-                    [`${error.path}`]: error.errors[0],
-                },
+                data: error.errors,
             });
         }
 
