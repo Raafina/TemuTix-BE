@@ -1,7 +1,9 @@
 import swaggerAutogen from 'swagger-autogen';
 
 const outputFile = './swagger-output.json';
-const endpointsFiles = ['../routes/api.ts'];
+
+const endpointsFiles = ['./src/routes/index.ts'];
+
 const doc = {
   info: {
     version: 'v0.0.1',
@@ -11,7 +13,7 @@ const doc = {
   servers: [
     { url: 'http://localhost:3009/api', description: 'Local Server' },
     {
-      url: 'https://temutixapi.vercel.app/',
+      url: 'https://temutixapi.vercel.app/api',
       description: 'Production Server',
     },
   ],
@@ -37,7 +39,38 @@ const doc = {
       ActivationRequest: {
         code: '12345',
       },
+      CreateCategoryRequest: {
+        name: "",
+        description: "",
+        icon: "",
+      },
+      CreateEventRequest: {
+        name: "",
+        banner: "fileUrl",
+        category: "category ObjectID",
+        description: "",
+        startDate: "yyyy-mm-dd hh:mm:ss",
+        endDate: "yyyy-mm-dd hh:mm:ss",
+        location: {
+          region: 3273,
+          coordinates: [0, 0],
+          address: "",
+        },
+        isOnline: false,
+        isFeatured: false,
+        isPublish: false,
+      },
+      RemoveMediaRequest: {
+        fileUrl: "",
+      },
+      CreateBannerRequest: {
+        title: "Banner 3 - Title",
+        image:
+          "https://res.cloudinary.com/raafina/image/upload/v1752488426/Rineko_wzaxxy.png",
+        isShow: false,
+      },
     },
+
   },
 };
 
