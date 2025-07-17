@@ -2,7 +2,7 @@ import { Response } from "express";
 import { IReqUser, IPaginationQuery } from "../utils/interface";
 import EventModel, { eventDTO, TEvent } from "../models/event.model";
 import response from "../utils/response";
-import { FilterQuery } from "mongoose";
+import { FilterQuery, isValidObjectId } from "mongoose";
 
 export default {
     async create(req: IReqUser, res: Response) {
@@ -55,8 +55,11 @@ export default {
         try {
             const { id } = req.params;
 
-            const result = await EventModel.findById(id);
+            if (!isValidObjectId(id)) {
+                return response.notFound(res, "Failed update an event");
+            }
 
+            const result = await EventModel.findById(id);
 
             if (!result) {
                 return response.notFound(res, "Event not found");
@@ -70,6 +73,10 @@ export default {
     async update(req: IReqUser, res: Response) {
         try {
             const { id } = req.params;
+
+            if (!isValidObjectId(id)) {
+                return response.notFound(res, "Failed update an event");
+            }
 
             const result = await EventModel.findByIdAndUpdate(id, req.body, { new: true });
 
@@ -86,6 +93,10 @@ export default {
         try {
             const { id } = req.params;
 
+            if (!isValidObjectId(id)) {
+                return response.notFound(res, "Failed remove an event");
+            }
+
             const result = await EventModel.findByIdAndDelete(id, { new: true });
 
             if (!result) {
@@ -100,6 +111,10 @@ export default {
     async findOneBySlug(req: IReqUser, res: Response) {
         try {
             const { slug } = req.params;
+
+            if (!slug) {
+                return response.notFound(res, "Failed find an event by slug");
+            }
 
             const result = await EventModel.findOne({ slug });
 

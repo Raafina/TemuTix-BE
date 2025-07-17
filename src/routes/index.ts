@@ -5,6 +5,7 @@ import categoryRoute from './category.route';
 import regionRoute from './region.route';
 import eventRoute from './event.route';
 import ticketRoute from './ticket.route'
+import bannerRoute from './banner.route'
 
 const router = express.Router();
 
@@ -14,5 +15,6 @@ router.use('/category', categoryRoute);
 router.use('/regions', regionRoute);
 router.use('/events', eventRoute);
 router.use('/tickets', ticketRoute);
+router.use('/banners', bannerRoute);
 
 export default router;

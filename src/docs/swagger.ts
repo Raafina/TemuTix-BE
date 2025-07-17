@@ -73,9 +73,10 @@ const doc = {
       CreateBannerRequest: {
         title: "Banner 3 - Title",
         image:
-          "https://res.cloudinary.com/raafina/image/upload/v1752488426/Rineko_wzaxxy.png",
+          "https://res.cloudinary.com/raafina/image/upload/v1752767319/BANNER_ocwo0m.png",
         isShow: false,
       },
+
     },
 
   },
