@@ -17,7 +17,7 @@ export default {
             const result = await EventModel.create(payload);
             response.success(res, result, "Success create event");
         } catch (error) {
-            return response.error(res, error, "failed to create an event");
+            return response.error(res, error, "Failed create an event");
         }
     },
     async findAll(req: IReqUser, res: Response) {
@@ -57,6 +57,11 @@ export default {
 
             const result = await EventModel.findById(id);
 
+
+            if (!result) {
+                return response.notFound(res, "Event not found");
+            }
+
             response.success(res, result, "Success find an event");
         } catch (error) {
             response.error(res, error, "Failed  find an event");
@@ -67,6 +72,10 @@ export default {
             const { id } = req.params;
 
             const result = await EventModel.findByIdAndUpdate(id, req.body, { new: true });
+
+            if (!result) {
+                return response.notFound(res, "Event not found");
+            }
 
             response.success(res, result, "Success update an event");
         } catch (error) {
@@ -79,6 +88,10 @@ export default {
 
             const result = await EventModel.findByIdAndDelete(id, { new: true });
 
+            if (!result) {
+                return response.notFound(res, "Event not found");
+            }
+
             response.success(res, result, "Success remove an event");
         } catch (error) {
             response.error(res, error, "Failed remove an event");
@@ -89,6 +102,10 @@ export default {
             const { slug } = req.params;
 
             const result = await EventModel.findOne({ slug });
+
+            if (!result) {
+                return response.notFound(res, "Event not found");
+            }
 
             response.success(res, result, "Success find an event by slug");
         } catch (error) {

@@ -48,7 +48,13 @@ export default {
     async findOne(req: IReqUser, res: Response) {
         try {
             const { id } = req.params;
+
             const result = await CategoryModel.findById(id);
+
+            if (!result) {
+                return response.notFound(res, "Category not found");
+            }
+
             response.success(res, result, "Success find one category");
         } catch (error) {
             response.error(res, error, "Failed find one category");
@@ -58,7 +64,13 @@ export default {
     async update(req: IReqUser, res: Response) {
         try {
             const { id } = req.params;
+
             const result = await CategoryModel.findByIdAndUpdate(id, req.body, { new: true }); // option new = true -> return new data
+
+            if (!result) {
+                return response.notFound(res, "Category not found");
+            }
+
             response.success(res, result, "Success update category");
         } catch (error) {
             response.error(res, error, "Failed update category");
@@ -68,7 +80,13 @@ export default {
     async remove(req: IReqUser, res: Response) {
         try {
             const { id } = req.params;
+
             const result = await CategoryModel.findByIdAndDelete(id, { new: true });
+
+            if (!result) {
+                return response.notFound(res, "Category not found");
+            }
+
             response.success(res, result, "Success remove category");
         } catch (error) {
             response.error(res, error, "Failed remove category");
