@@ -4,6 +4,8 @@ import { renderMailHtml, sendMail } from '../utils/mail/mail';
 import { CLIEN_HOST, EMAIL_SMTP_USER } from '../utils/env';
 import { ROLES } from '../utils/contants';
 
+export const USER_MODEL_NAME = 'User';
+
 export interface User {
   fullName: string;
   username: string;
@@ -82,6 +84,6 @@ UserSchema.methods.toJSON = function () {
 };
 
 // jembatan dari controller ke database
-const UserModel = mongoose.model('User', UserSchema);
+const UserModel = mongoose.model(USER_MODEL_NAME, UserSchema);
 
 export default UserModel;

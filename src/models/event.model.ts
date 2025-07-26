@@ -28,9 +28,9 @@ export const eventDTO = Yup.object({
         .required(),
 });
 
-export type TEvent = Yup.InferType<typeof eventDTO>;
+export type TypeEvent = Yup.InferType<typeof eventDTO>;
 
-export interface Event extends Omit<TEvent, "category" | "createdBy"> {
+export interface Event extends Omit<TypeEvent, "category" | "createdBy"> {
     category: ObjectId;
     createdBy: ObjectId;
 }
