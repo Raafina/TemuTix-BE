@@ -80,7 +80,7 @@ export default {
             const { id } = req.params;
 
             if (!isValidObjectId(id)) {
-                return response.notFound(res, "Failed update an event");
+                return response.notFound(res, "Failed find an event");
             }
 
             const result = await EventModel.findById(id);

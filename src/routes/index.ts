@@ -6,6 +6,7 @@ import regionRoute from './region.route';
 import eventRoute from './event.route';
 import ticketRoute from './ticket.route'
 import bannerRoute from './banner.route'
+import orderRoute from './order.route'
 
 const router = express.Router();
 
@@ -16,5 +17,6 @@ router.use('/regions', regionRoute);
 router.use('/events', eventRoute);
 router.use('/tickets', ticketRoute);
 router.use('/banners', bannerRoute);
+router.use('/orders', orderRoute);
 
 export default router;
