@@ -3,6 +3,7 @@ import { IReqUser, IPaginationQuery } from "../utils/interface";
 import EventModel, { eventDTO, TypeEvent } from "../models/event.model";
 import response from "../utils/response";
 import { FilterQuery, isValidObjectId } from "mongoose";
+import uploader from "../utils/uploader";
 
 export default {
     async create(req: IReqUser, res: Response) {
@@ -126,6 +127,8 @@ export default {
             if (!result) {
                 return response.notFound(res, "Event not found");
             }
+
+            await uploader.remove(result.banner);
 
             response.success(res, result, "Success remove an event");
         } catch (error) {
