@@ -4,6 +4,7 @@ import bodyParser from 'body-parser';
 import db from './utils/database';
 import docs from './docs/routes';
 import cors from 'cors';
+import errorMiddleware from './middlewares/error.middleware';
 
 async function init() {
   try {
@@ -23,7 +24,11 @@ async function init() {
     // for swagger docs
     docs(app);
 
+    app.use(errorMiddleware.serverRoute());
+    app.use(errorMiddleware.serverError());
+
     const PORT = 3009;
+
     app.listen(PORT, () => {
       console.log(`Server Running on http://localhost:${PORT}`);
     });
