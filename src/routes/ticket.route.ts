@@ -6,7 +6,10 @@ import { ROLES } from '../utils/contants';
 
 const router = express.Router();
 
-router.post('/', [authMiddleware, aclMiddleware([ROLES.ADMIN])], ticketController.create
+router.post(
+  '/',
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  ticketController.create
   /*
    #swagger.tags = ['Tickets']
    #swagger.security = [{
@@ -21,7 +24,9 @@ router.post('/', [authMiddleware, aclMiddleware([ROLES.ADMIN])], ticketControlle
    */
 );
 
-router.get('/', ticketController.findAll
+router.get(
+  '/',
+  ticketController.findAll
   /*
    #swagger.tags = ['Tickets']
    #swagger.parameters['limit'] = {
@@ -53,20 +58,27 @@ router.get('/', ticketController.findAll
    */
 );
 
-router.get('/:id', ticketController.findOne
+router.get(
+  '/:id',
+  ticketController.findOne
   /*
     #swagger.tags = ['Tickets']
     */
 );
 
-router.get('/:eventId/events', ticketController.findAllByEvent
+router.get(
+  '/:eventId/events',
+  ticketController.findAllByEvent
   /*
    #swagger.tags = ['Tickets']
    */
 );
 
 
-router.put('/:id', [authMiddleware, aclMiddleware([ROLES.ADMIN])], ticketController.update
+router.put(
+  '/:id',
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  ticketController.update
   /*
    #swagger.tags = ['Tickets']
    #swagger.security = [{
@@ -80,7 +92,10 @@ router.put('/:id', [authMiddleware, aclMiddleware([ROLES.ADMIN])], ticketControl
    }
    */
 );
-router.delete('/:id', [authMiddleware, aclMiddleware([ROLES.ADMIN])], ticketController.remove
+router.delete(
+  '/:id',
+  [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+  ticketController.remove
   /*
    #swagger.tags = ['Tickets']
    #swagger.security = [{

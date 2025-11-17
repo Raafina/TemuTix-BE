@@ -6,7 +6,10 @@ import orderController from '../controllers/order.controller';
 
 const router = express.Router();
 
-router.post("/", [authMiddleware, aclMiddleware([ROLES.MEMBER])], orderController.create
+router.post(
+    "/",
+    [authMiddleware, aclMiddleware([ROLES.MEMBER])],
+    orderController.create
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -21,7 +24,10 @@ router.post("/", [authMiddleware, aclMiddleware([ROLES.MEMBER])], orderControlle
     */
 )
 
-router.get("/", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.findAll
+router.get(
+    "/",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    orderController.findAll
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -29,7 +35,10 @@ router.get("/", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.
     }]
     */)
 
-router.get("/:id", [authMiddleware, aclMiddleware([ROLES.ADMIN, ROLES.MEMBER])], orderController.findOne
+router.get(
+    "/:id",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN, ROLES.MEMBER])],
+    orderController.findOne
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -38,7 +47,10 @@ router.get("/:id", [authMiddleware, aclMiddleware([ROLES.ADMIN, ROLES.MEMBER])],
     */
 )
 
-router.put("/:id/completed", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.complete
+router.put(
+    "/:id/completed",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    orderController.complete
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -47,7 +59,10 @@ router.put("/:id/completed", [authMiddleware, aclMiddleware([ROLES.ADMIN])], ord
     */
 )
 
-router.put("/id/pending", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.pending
+router.put(
+    "/id/pending",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    orderController.pending
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -55,7 +70,10 @@ router.put("/id/pending", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderC
     }]
     */)
 
-router.put(":/id/cancelled", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.cancelled
+router.put(
+    ":/id/cancelled",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    orderController.cancelled
     /*
     #swagger.tags = ['Order']
     #swagger.security = [{
@@ -63,7 +81,10 @@ router.put(":/id/cancelled", [authMiddleware, aclMiddleware([ROLES.ADMIN])], ord
     }]
     */)
 
-router.get("/orders-history", [authMiddleware, aclMiddleware([ROLES.MEMBER])], orderController.findAll
+router.get(
+    "/orders-history",
+    [authMiddleware, aclMiddleware([ROLES.MEMBER])],
+    orderController.findAll
         /*
         #swagger.tags = ['Order']
         #swagger.security = [{
@@ -71,7 +92,10 @@ router.get("/orders-history", [authMiddleware, aclMiddleware([ROLES.MEMBER])], o
         }]
         */)
 
-router.delete("/:id", [authMiddleware, aclMiddleware([ROLES.ADMIN])], orderController.remove
+router.delete(
+    "/:id",
+    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    orderController.remove
             /*
             #swagger.tags = ['Order']
             #swagger.security = [{

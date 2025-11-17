@@ -36,6 +36,15 @@ const doc = {
         password: '12345',
         confirmPassword: '12345',
       },
+      UpdateProfileRequest: {
+        fullName: "",
+        profilePicture: "",
+      },
+      UpdatePasswordRequest: {
+        oldPassword: "",
+        password: "",
+        confirmPassword: "",
+      },
       ActivationRequest: {
         code: '12345',
       },
