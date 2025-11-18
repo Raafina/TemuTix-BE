@@ -1,7 +1,7 @@
-import { IReqUser } from '../utils/interface';
-import { Request, Response, NextFunction } from 'express';
-import { getUserData } from '../utils/jwt';
-import response from '../utils/response';
+import { NextFunction, Request, Response } from "express";
+import { getUserData } from "../utils/jwt";
+import { IReqUser } from "../utils/interface";
+import response from "../utils/response";
 
 export default (req: Request, res: Response, next: NextFunction) => {
   const authorization = req.headers?.authorization;
@@ -10,8 +10,9 @@ export default (req: Request, res: Response, next: NextFunction) => {
     return response.unauthorized(res);
   }
 
-  const [prefix, token] = authorization.split(' ');
-  if (!(prefix === 'Bearer' && token)) {
+  const [prefix, token] = authorization.split(" ");
+
+  if (!(prefix === "Bearer" && token)) {
     return response.unauthorized(res);
   }
 

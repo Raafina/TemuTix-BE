@@ -36,6 +36,17 @@ router.get(
     */)
 
 router.get(
+    "/history",
+    [authMiddleware, aclMiddleware([ROLES.MEMBER])],
+    orderController.findAllByMember
+        /*
+        #swagger.tags = ['Order']
+        #swagger.security = [{
+            "bearerAuth": ""
+        }]
+        */)
+
+router.get(
     "/:id",
     [authMiddleware, aclMiddleware([ROLES.ADMIN, ROLES.MEMBER])],
     orderController.findOne
@@ -60,7 +71,7 @@ router.put(
 )
 
 router.put(
-    "/id/pending",
+    "/:id/pending",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.pending
     /*
@@ -71,7 +82,7 @@ router.put(
     */)
 
 router.put(
-    ":/id/cancelled",
+    "/:id/cancelled",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.cancelled
     /*
@@ -81,16 +92,6 @@ router.put(
     }]
     */)
 
-router.get(
-    "/orders-history",
-    [authMiddleware, aclMiddleware([ROLES.MEMBER])],
-    orderController.findAll
-        /*
-        #swagger.tags = ['Order']
-        #swagger.security = [{
-            "bearerAuth": ""
-        }]
-        */)
 
 router.delete(
     "/:id",

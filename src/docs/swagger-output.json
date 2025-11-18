@@ -1221,6 +1221,47 @@
         ]
       }
     },
+    "/orders/history": {
+      "get": {
+        "tags": [
+          "Order"
+        ],
+        "description": "",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "page",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "search",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "default": {
+            "description": ""
+          }
+        },
+        "security": [
+          {
+            "bearerAuth": ""
+          }
+        ]
+      }
+    },
     "/orders/{id}": {
       "get": {
         "tags": [
@@ -1303,25 +1344,7 @@
         ]
       }
     },
-    "/orders/id/pending": {
-      "put": {
-        "tags": [
-          "Order"
-        ],
-        "description": "",
-        "responses": {
-          "default": {
-            "description": ""
-          }
-        },
-        "security": [
-          {
-            "bearerAuth": ""
-          }
-        ]
-      }
-    },
-    "/{orders}/id/cancelled": {
+    "/orders/{id}/pending": {
       "put": {
         "tags": [
           "Order"
@@ -1329,7 +1352,7 @@
         "description": "",
         "parameters": [
           {
-            "name": "orders",
+            "name": "id",
             "in": "path",
             "required": true,
             "schema": {
@@ -1349,30 +1372,17 @@
         ]
       }
     },
-    "/orders/orders-history": {
-      "get": {
+    "/orders/{id}/cancelled": {
+      "put": {
         "tags": [
           "Order"
         ],
         "description": "",
         "parameters": [
           {
-            "name": "limit",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "page",
-            "in": "query",
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "search",
-            "in": "query",
+            "name": "id",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }
