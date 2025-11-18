@@ -47,7 +47,7 @@ router.get(
         */)
 
 router.get(
-    "/:id",
+    "/:orderId",
     [authMiddleware, aclMiddleware([ROLES.ADMIN, ROLES.MEMBER])],
     orderController.findOne
     /*
@@ -59,7 +59,7 @@ router.get(
 )
 
 router.put(
-    "/:id/completed",
+    "/:orderId/completed",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.complete
     /*
@@ -71,7 +71,7 @@ router.put(
 )
 
 router.put(
-    "/:id/pending",
+    "/:orderId/pending",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.pending
     /*
@@ -82,7 +82,7 @@ router.put(
     */)
 
 router.put(
-    "/:id/cancelled",
+    "/:orderId/cancelled",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.cancelled
     /*
@@ -94,7 +94,7 @@ router.put(
 
 
 router.delete(
-    "/:id",
+    "/:orderId",
     [authMiddleware, aclMiddleware([ROLES.ADMIN])],
     orderController.remove
             /*
