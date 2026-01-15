@@ -3,82 +3,223 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Temutix - Activation User</title>
+    <title>Welcome to Temutix</title>
   </head>
-  <style>
-    body {
-      font-family: Arial, Helvetica, sans-serif;
+  <body
+    style="
       margin: 0;
       padding: 0;
-      background-color: #f4f4f4;
-    }
-    .container {
-      max-width: 600px;
-      margin: 2px auto;
-      background-color: #f4f4f4;
-      border: 1px solid #dddddd;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    .header {
-      background-color: #4caf50;
-      color: #ffffff;
-      padding: 20px;
-      text-align: center;
-    }
-    .content {
-      padding: 20px;
-    }
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto,
+        'Helvetica Neue', Arial, sans-serif;
+      background-color: #f5f5f5;
+    ">
+    <table role="presentation" style="width: 100%; border-collapse: collapse">
+      <tr>
+        <td align="center" style="padding: 40px 20px">
+          <table
+            role="presentation"
+            style="
+              max-width: 600px;
+              width: 100%;
+              background-color: #ffffff;
+              border-radius: 12px;
+              box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            ">
+            <!-- Header -->
+            <tr>
+              <td style="padding: 48px 48px 32px; text-align: center">
+                <h1
+                  style="
+                    margin: 0 0 12px;
+                    font-size: 28px;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                    letter-spacing: -0.5px;
+                  ">
+                  Welcome to Temutix
+                </h1>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 16px;
+                    color: #666666;
+                    line-height: 1.5;
+                  ">
+                  Your account has been created successfully
+                </p>
+              </td>
+            </tr>
 
-    .footer {
-      background-color: #f1f1f1;
-      color: #555555;
-      padding: 10px;
-      text-align: center;
-      font-size: 12px;
-    }
+            <!-- Account Details -->
+            <tr>
+              <td style="padding: 0 48px 32px">
+                <table
+                  role="presentation"
+                  style="
+                    width: 100%;
+                    border-collapse: collapse;
+                    background-color: #f8f9fa;
+                    border-radius: 8px;
+                    padding: 24px;
+                  ">
+                  <tr>
+                    <td style="padding: 8px 0">
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 13px;
+                          color: #888888;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                        ">
+                        Name
+                      </p>
+                      <p
+                        style="
+                          margin: 4px 0 0;
+                          font-size: 16px;
+                          color: #1a1a1a;
+                          font-weight: 500;
+                        ">
+                        <%= fullName %>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 16px 0 8px">
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 13px;
+                          color: #888888;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                        ">
+                        Email
+                      </p>
+                      <p
+                        style="
+                          margin: 4px 0 0;
+                          font-size: 16px;
+                          color: #1a1a1a;
+                          font-weight: 500;
+                        ">
+                        <%= email %>
+                      </p>
+                    </td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 16px 0 0">
+                      <p
+                        style="
+                          margin: 0;
+                          font-size: 13px;
+                          color: #888888;
+                          text-transform: uppercase;
+                          letter-spacing: 0.5px;
+                        ">
+                        Registration Date
+                      </p>
+                      <p
+                        style="
+                          margin: 4px 0 0;
+                          font-size: 16px;
+                          color: #1a1a1a;
+                          font-weight: 500;
+                        ">
+                        <%= createdAt %>
+                      </p>
+                    </td>
+                  </tr>
+                </table>
+              </td>
+            </tr>
 
-    .button {
-      display: inline-block;
-      padding: 10px 20px;
-      margin: 20px 0px;
-      color: #ffffff;
-      text-decoration: none;
-      border-radius: 5px;
-    }
+            <!-- Next Steps -->
+            <tr>
+              <td style="padding: 0 48px 24px">
+                <h2
+                  style="
+                    margin: 0 0 12px;
+                    font-size: 20px;
+                    font-weight: 600;
+                    color: #1a1a1a;
+                  ">
+                  Next Steps
+                </h2>
+                <p
+                  style="
+                    margin: 0;
+                    font-size: 15px;
+                    color: #666666;
+                    line-height: 1.6;
+                  ">
+                  To start using Temutix and access all features, please
+                  activate your account by clicking the button below. This will
+                  verify your email address and complete your registration.
+                </p>
+              </td>
+            </tr>
 
-    @media (max-width: 600px) {
-      .container {
-        width: 100%;
-        margin: 0;
-        border-radius: 0;
-      }
-    }
-  </style>
-  <body>
-    <div class="container">
-      <div class="header">
-        <h1>Welcome!</h1>
-      </div>
-      <div class="content">
-        <p>Hi <%= username %></p>
-        <p>
-          Terimakasih telah mendaftar dilayanan kami. Berikuat adalah informasi
-          dari akun Anda:
-        </p>
-        <ul>
-          <li><strong>Name: <%= fullName %></strong></li>
-          <li><strong>Email: <%= email %></strong></li>
-          <li><strong>Registration Date:<%= createdAt %></strong></li>
-        </ul>
-        <p>For starting using our service, please click the button below:</p>
-        <a href="<%= activationUrl %>" class="button">Aktifkan Akun</a>
-        <p>If you have any questions, please contact our support team.</p>
-        <p>Best regards, Temutix</p>
-      </div>
-      <div class="footer">
-        <p>&copy; 2025 Temutix Event Management System. All rights reserved.</p>
-      </div>
-    </div>
+            <!-- CTA Button -->
+            <tr>
+              <td style="padding: 0 48px 48px; text-align: center">
+                <a
+                  href="<%= activationUrl %>"
+                  style="
+                    display: inline-block;
+                    padding: 14px 40px;
+                    background-color: #742ec8;
+                    color: #ffffff;
+                    text-decoration: none;
+                    border-radius: 8px;
+                    font-size: 16px;
+                    font-weight: 600;
+                    transition: background-color 0.2s;
+                  "
+                  >Activate Account</a
+                >
+                <p style="margin: 16px 0 0; font-size: 13px; color: #999999">
+                  This link will expire in 24 hours
+                </p>
+              </td>
+            </tr>
+
+            <!-- Footer -->
+            <tr>
+              <td
+                style="
+                  padding: 32px 48px;
+                  border-top: 1px solid #e5e7eb;
+                  text-align: center;
+                ">
+                <p
+                  style="
+                    margin: 0 0 16px;
+                    font-size: 14px;
+                    color: #666666;
+                    line-height: 1.6;
+                  ">
+                  Need help? Contact our
+                  <a
+                    href="mailto:support@temutix.com"
+                    style="color: #742ec8; text-decoration: none"
+                    >support team</a
+                  >
+                </p>
+                <p style="margin: 0; font-size: 12px; color: #999999">
+                  © <span id="year"></span> Temutix Event Management System. All
+                  rights reserved.
+                </p>
+              </td>
+            </tr>
+          </table>
+        </td>
+      </tr>
+    </table>
+
+    <script>
+      document.getElementById('year').textContent = new Date().getFullYear();
+    </script>
   </body>
 </html>

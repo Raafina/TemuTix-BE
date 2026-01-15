@@ -60,7 +60,7 @@ router.get(
 
 router.put(
     "/:orderId/completed",
-    [authMiddleware, aclMiddleware([ROLES.ADMIN])],
+    [authMiddleware, aclMiddleware([ROLES.MEMBER])],
     orderController.complete
     /*
     #swagger.tags = ['Order']
